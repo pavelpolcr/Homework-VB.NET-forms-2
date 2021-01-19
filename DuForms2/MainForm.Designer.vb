@@ -23,17 +23,18 @@ Partial Class MainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.EndLabel = New System.Windows.Forms.Label()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.NápovědaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ZobrazitNápověduToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SouborToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OtevřítToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UložitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NápovědaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ZobrazitNápověduToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EscButton = New System.Windows.Forms.Button()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
@@ -63,6 +64,12 @@ Partial Class MainForm
         Me.TrackBar = New System.Windows.Forms.TrackBar()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.ProgressBar = New System.Windows.Forms.ProgressBar()
+        Me.InstallLabel = New System.Windows.Forms.Label()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.ToolStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -95,6 +102,7 @@ Partial Class MainForm
         Me.ToolStrip1.Size = New System.Drawing.Size(800, 25)
         Me.ToolStrip1.TabIndex = 1
         Me.ToolStrip1.Text = "ToolStrip1"
+        Me.ToolTip1.SetToolTip(Me.ToolStrip1, "Kliknněte na obrázek ke změně ikony tlačítka níže.")
         '
         'ToolStripButton1
         '
@@ -104,6 +112,7 @@ Partial Class MainForm
         Me.ToolStripButton1.Name = "ToolStripButton1"
         Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton1.Text = "ToolStripButton1"
+        Me.ToolStripButton1.ToolTipText = "Klikni pro výběr tohoto obrázku pro tlačítko."
         '
         'ToolStripButton2
         '
@@ -113,6 +122,7 @@ Partial Class MainForm
         Me.ToolStripButton2.Name = "ToolStripButton2"
         Me.ToolStripButton2.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton2.Text = "ToolStripButton2"
+        Me.ToolStripButton2.ToolTipText = "Klikni pro výběr tohoto obrázku pro tlačítko."
         '
         'ToolStripButton3
         '
@@ -122,28 +132,16 @@ Partial Class MainForm
         Me.ToolStripButton3.Name = "ToolStripButton3"
         Me.ToolStripButton3.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton3.Text = "ToolStripButton3"
+        Me.ToolStripButton3.ToolTipText = "Klikni pro výběr tohoto obrázku pro tlačítko."
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NápovědaToolStripMenuItem, Me.SouborToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SouborToolStripMenuItem, Me.NápovědaToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(800, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
-        '
-        'NápovědaToolStripMenuItem
-        '
-        Me.NápovědaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ZobrazitNápověduToolStripMenuItem})
-        Me.NápovědaToolStripMenuItem.Name = "NápovědaToolStripMenuItem"
-        Me.NápovědaToolStripMenuItem.Size = New System.Drawing.Size(73, 20)
-        Me.NápovědaToolStripMenuItem.Text = "Nápověda"
-        '
-        'ZobrazitNápověduToolStripMenuItem
-        '
-        Me.ZobrazitNápověduToolStripMenuItem.Name = "ZobrazitNápověduToolStripMenuItem"
-        Me.ZobrazitNápověduToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
-        Me.ZobrazitNápověduToolStripMenuItem.Text = "Zobrazit nápovědu"
         '
         'SouborToolStripMenuItem
         '
@@ -163,6 +161,19 @@ Partial Class MainForm
         Me.UložitToolStripMenuItem.Name = "UložitToolStripMenuItem"
         Me.UložitToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
         Me.UložitToolStripMenuItem.Text = "Uložit"
+        '
+        'NápovědaToolStripMenuItem
+        '
+        Me.NápovědaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ZobrazitNápověduToolStripMenuItem})
+        Me.NápovědaToolStripMenuItem.Name = "NápovědaToolStripMenuItem"
+        Me.NápovědaToolStripMenuItem.Size = New System.Drawing.Size(73, 20)
+        Me.NápovědaToolStripMenuItem.Text = "Nápověda"
+        '
+        'ZobrazitNápověduToolStripMenuItem
+        '
+        Me.ZobrazitNápověduToolStripMenuItem.Name = "ZobrazitNápověduToolStripMenuItem"
+        Me.ZobrazitNápověduToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ZobrazitNápověduToolStripMenuItem.Text = "Zobrazit nápovědu"
         '
         'EscButton
         '
@@ -390,7 +401,7 @@ Partial Class MainForm
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 428)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(800, 22)
@@ -403,12 +414,47 @@ Partial Class MainForm
         Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(119, 17)
         Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
         '
+        'ToolStripStatusLabel2
+        '
+        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(119, 17)
+        Me.ToolStripStatusLabel2.Text = "ToolStripStatusLabel2"
+        '
+        'Timer1
+        '
+        Me.Timer1.Interval = 1000
+        '
+        'ProgressBar
+        '
+        Me.ProgressBar.Location = New System.Drawing.Point(12, 400)
+        Me.ProgressBar.Maximum = 10
+        Me.ProgressBar.Name = "ProgressBar"
+        Me.ProgressBar.Size = New System.Drawing.Size(286, 11)
+        Me.ProgressBar.Step = 1
+        Me.ProgressBar.TabIndex = 19
+        '
+        'InstallLabel
+        '
+        Me.InstallLabel.AutoSize = True
+        Me.InstallLabel.Location = New System.Drawing.Point(328, 400)
+        Me.InstallLabel.Name = "InstallLabel"
+        Me.InstallLabel.Size = New System.Drawing.Size(39, 13)
+        Me.InstallLabel.TabIndex = 20
+        Me.InstallLabel.Text = "Label3"
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        Me.OpenFileDialog1.Filter = "txt|*.txt|Vsechny Soubory|*.*"
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.EscButton
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.InstallLabel)
+        Me.Controls.Add(Me.ProgressBar)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.TrackBar)
         Me.Controls.Add(Me.Label2)
@@ -431,9 +477,10 @@ Partial Class MainForm
         Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.PictureBox1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "MainForm"
-        Me.Text = "MainForm"
+        Me.Text = "Objednávka Nábytku"
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
@@ -494,4 +541,10 @@ Partial Class MainForm
     Friend WithEvents TrackBar As Windows.Forms.TrackBar
     Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip
     Friend WithEvents ToolStripStatusLabel1 As Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents Timer1 As Windows.Forms.Timer
+    Friend WithEvents ToolStripStatusLabel2 As Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ProgressBar As Windows.Forms.ProgressBar
+    Friend WithEvents InstallLabel As Windows.Forms.Label
+    Friend WithEvents OpenFileDialog1 As Windows.Forms.OpenFileDialog
+    Friend WithEvents SaveFileDialog1 As Windows.Forms.SaveFileDialog
 End Class

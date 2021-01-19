@@ -5,6 +5,7 @@ Imports System.Windows.Forms
 
 Public Class MainForm
     Public actOrder As New Order
+    Public HelpForm As Form
     Public materials As New List(Of String)
     Dim radiobuttons As New List(Of RadioButton)
     Dim radiobuttonBeingEdited As RadioButton
@@ -12,6 +13,8 @@ Public Class MainForm
     Dim itemBeingEdited As String
     Dim calcVal1 As Integer
     Dim calcVal2 As Integer
+    Public cekat As Integer
+    Dim passedTime As Integer
     Dim i As Integer
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click, ToolStripButton2.Click, ToolStripButton3.Click
         EscButton.BackgroundImage = sender.image
@@ -36,6 +39,11 @@ Public Class MainForm
     End Sub
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        HelpForm = New Help
+        HelpForm.ShowDialog()
+        Timer1.Start()
+
+        ToolStripStatusLabel2.Text = DateTime.Now.ToString("HH:mm")
         materials.AddRange({"KOV", "DREVO", "PLAST"})
         itemTypes.AddRange({"zidle", "Stul", "Postel"})
         AddHandler ShinyCheckbox.CheckedChanged, AddressOf RefreshOrderChoices
@@ -46,6 +54,7 @@ Public Class MainForm
         ToolStripStatusLabel1.Text = TrackBar.Value
         RefreshMaterialChoices()
         RefreshITemTypeChoices()
+        cekat = 10
 
     End Sub
 
@@ -61,6 +70,14 @@ Public Class MainForm
     Private Sub ContextMenuStripRemoveMaterial_Opening(sender As ContextMenuStrip, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStripRemoveMaterial.Opening
         radiobuttonBeingEdited = sender.SourceControl
     End Sub
+    Private Sub AddItem(sender As Object, e As EventArgs) Handles AddItemPermanently.Click
+        itemTypes.Add(itemBeingEdited)
+        RefreshITemTypeChoices()
+    End Sub
+    Private Sub RemoveItem(sender As Object, e As EventArgs) Handles OdebratZMoznostiToolStripMenuItem.Click
+        itemTypes.Remove(itemBeingEdited)
+        RefreshITemTypeChoices()
+    End Sub
 
     Private Sub ManipulateItems_Opening(sender As ContextMenuStrip, e As System.ComponentModel.CancelEventArgs) Handles ManipulateItems.Opening
         Dim selectedItem As String
@@ -75,7 +92,9 @@ Public Class MainForm
         Else
             sender.Items.Item("OdebratZMoznostiToolStripMenuItem").Enabled = False
         End If
+        itemBeingEdited = selectedItem
     End Sub
+
 
     Private Sub RefreshOrderChoices(sender As Object, e As EventArgs)
         Select Case sender.GetType()
@@ -137,6 +156,41 @@ Public Class MainForm
     Private Sub TrackBar_Scroll(sender As TrackBar, e As EventArgs) Handles TrackBar.Scroll
         ToolStripStatusLabel1.Text = sender.Value.ToString
         ToolTip1.SetToolTip(sender, "Nastaveno: " + sender.Value.ToString)
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        ToolStripStatusLabel2.Text = DateTime.Now.ToString("HH:mm")
+        passedTime += 1
+        If (cekat > 0) Then
+            cekat -= 1
+            ProgressBar.Value += 1
+            InstallLabel.Text = ("Proviha instalace soucasti - cekejte jeste " + cekat.ToString + " s.")
+        Else
+            InstallLabel.Text = "Instalace hotova."
+        End If
+
+
+
+    End Sub
+
+    Private Sub OtevřítToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OtevřítToolStripMenuItem.Click
+        Dim dialResult As DialogResult
+        dialResult = OpenFileDialog1.ShowDialog()
+        If dialResult.Equals(DialogResult.OK) Then 'Check for valid file choice and opening - user pressed 
+            FileOpen(1, OpenFileDialog1.FileName, OpenMode.Input)
+            Try
+                Input(1, TextBoxMain.Text)
+            Catch
+                MsgBox("Chyba!")
+            Finally
+                FileClose(1)
+
+            End Try
+        End If
+    End Sub
+
+    Private Sub ZobrazitNápověduToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ZobrazitNápověduToolStripMenuItem.Click
+        HelpForm.ShowDialog()
     End Sub
 End Class
 Public Class Order
