@@ -153,13 +153,13 @@ Partial Class MainForm
         'OtevřítToolStripMenuItem
         '
         Me.OtevřítToolStripMenuItem.Name = "OtevřítToolStripMenuItem"
-        Me.OtevřítToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
+        Me.OtevřítToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.OtevřítToolStripMenuItem.Text = "Otevřít"
         '
         'UložitToolStripMenuItem
         '
         Me.UložitToolStripMenuItem.Name = "UložitToolStripMenuItem"
-        Me.UložitToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
+        Me.UložitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.UložitToolStripMenuItem.Text = "Uložit"
         '
         'NápovědaToolStripMenuItem
@@ -172,7 +172,7 @@ Partial Class MainForm
         'ZobrazitNápověduToolStripMenuItem
         '
         Me.ZobrazitNápověduToolStripMenuItem.Name = "ZobrazitNápověduToolStripMenuItem"
-        Me.ZobrazitNápověduToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ZobrazitNápověduToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.ZobrazitNápověduToolStripMenuItem.Text = "Zobrazit nápovědu"
         '
         'EscButton
@@ -446,6 +446,11 @@ Partial Class MainForm
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         Me.OpenFileDialog1.Filter = "txt|*.txt|Vsechny Soubory|*.*"
+        '
+        'SaveFileDialog1
+        '
+        Me.SaveFileDialog1.DefaultExt = "txt"
+        Me.SaveFileDialog1.Filter = "txt | *.txt|vsechny soubory|*.*"
         '
         'MainForm
         '

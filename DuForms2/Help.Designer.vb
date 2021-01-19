@@ -22,11 +22,13 @@ Partial Class Help
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Help))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'Label1
@@ -54,6 +56,7 @@ Partial Class Help
         Me.ButtonClose.Size = New System.Drawing.Size(130, 44)
         Me.ButtonClose.TabIndex = 2
         Me.ButtonClose.Text = "Zavřít"
+        Me.ToolTip1.SetToolTip(Me.ButtonClose, "Nápovědu lze znovu vyvolat z programu.")
         Me.ButtonClose.UseVisualStyleBackColor = True
         '
         'LinkLabel1
@@ -87,4 +90,5 @@ Partial Class Help
     Friend WithEvents TextBox1 As Windows.Forms.TextBox
     Friend WithEvents ButtonClose As Windows.Forms.Button
     Friend WithEvents LinkLabel1 As Windows.Forms.LinkLabel
+    Friend WithEvents ToolTip1 As Windows.Forms.ToolTip
 End Class

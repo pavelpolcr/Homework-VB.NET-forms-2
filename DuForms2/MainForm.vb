@@ -112,7 +112,8 @@ Public Class MainForm
     End Sub
 
     Private Sub ActOrderLabel_DoubleClick(sender As Label, e As EventArgs) Handles ActOrderLabel.DoubleClick
-        TextBoxMain.Text += sender.Text
+        TextBoxMain.AppendText(Environment.NewLine)
+        TextBoxMain.AppendText(sender.Text)
     End Sub
 
     Private Sub ConfirmCalcButton_Click(sender As Object, e As EventArgs) Handles ConfirmCalcButton.Click
@@ -191,6 +192,21 @@ Public Class MainForm
 
     Private Sub ZobrazitNápověduToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ZobrazitNápověduToolStripMenuItem.Click
         HelpForm.ShowDialog()
+    End Sub
+
+    Private Sub UložitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UložitToolStripMenuItem.Click
+        Dim dialResult As DialogResult
+        dialResult = SaveFileDialog1.ShowDialog
+        If dialResult.Equals(DialogResult.OK) Then 'Check for valid file choice 
+            FileOpen(1, SaveFileDialog1.FileName, OpenMode.Output)
+            Try
+                Write(1, TextBoxMain.Text)
+            Catch ex As Exception
+                MsgBox("Chyba!")
+            Finally
+                FileClose(1)
+            End Try
+        End If
     End Sub
 End Class
 Public Class Order
