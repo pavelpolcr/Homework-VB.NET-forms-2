@@ -59,6 +59,10 @@ Partial Class MainForm
         Me.OperandLabel = New System.Windows.Forms.Label()
         Me.ConfirmCalcButton = New System.Windows.Forms.Button()
         Me.CalsResultLabel = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.TrackBar = New System.Windows.Forms.TrackBar()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,6 +73,8 @@ Partial Class MainForm
         Me.ContextMenuStripRemoveMaterial.SuspendLayout()
         Me.ManipulateItems.SuspendLayout()
         CType(Me.OrderedAmmntNumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'EndLabel
@@ -293,6 +299,7 @@ Partial Class MainForm
         Me.ShinyCheckbox.Size = New System.Drawing.Size(129, 17)
         Me.ShinyCheckbox.TabIndex = 5
         Me.ShinyCheckbox.Text = "V lesklém provedení?"
+        Me.ShinyCheckbox.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.ShinyCheckbox.UseVisualStyleBackColor = True
         '
         'TextBoxMain
@@ -309,7 +316,7 @@ Partial Class MainForm
         Me.OrderedAmmntNumericUpDown.Location = New System.Drawing.Point(331, 112)
         Me.OrderedAmmntNumericUpDown.Maximum = New Decimal(New Integer() {3, 0, 0, 0})
         Me.OrderedAmmntNumericUpDown.Name = "OrderedAmmntNumericUpDown"
-        Me.OrderedAmmntNumericUpDown.Size = New System.Drawing.Size(120, 20)
+        Me.OrderedAmmntNumericUpDown.Size = New System.Drawing.Size(37, 20)
         Me.OrderedAmmntNumericUpDown.TabIndex = 10
         Me.ToolTip1.SetToolTip(Me.OrderedAmmntNumericUpDown, "Počet položek v objednávce(max 3)")
         Me.OrderedAmmntNumericUpDown.Value = New Decimal(New Integer() {1, 0, 0, 0})
@@ -324,14 +331,14 @@ Partial Class MainForm
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(489, 43)
+        Me.TextBox1.Location = New System.Drawing.Point(536, 43)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(38, 20)
         Me.TextBox1.TabIndex = 11
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(552, 43)
+        Me.TextBox2.Location = New System.Drawing.Point(599, 43)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(38, 20)
         Me.TextBox2.TabIndex = 12
@@ -339,7 +346,7 @@ Partial Class MainForm
         'OperandLabel
         '
         Me.OperandLabel.AutoSize = True
-        Me.OperandLabel.Location = New System.Drawing.Point(533, 47)
+        Me.OperandLabel.Location = New System.Drawing.Point(580, 47)
         Me.OperandLabel.Name = "OperandLabel"
         Me.OperandLabel.Size = New System.Drawing.Size(13, 13)
         Me.OperandLabel.TabIndex = 13
@@ -347,7 +354,7 @@ Partial Class MainForm
         '
         'ConfirmCalcButton
         '
-        Me.ConfirmCalcButton.Location = New System.Drawing.Point(596, 43)
+        Me.ConfirmCalcButton.Location = New System.Drawing.Point(643, 43)
         Me.ConfirmCalcButton.Name = "ConfirmCalcButton"
         Me.ConfirmCalcButton.Size = New System.Drawing.Size(21, 20)
         Me.ConfirmCalcButton.TabIndex = 14
@@ -357,10 +364,44 @@ Partial Class MainForm
         'CalsResultLabel
         '
         Me.CalsResultLabel.AutoSize = True
-        Me.CalsResultLabel.Location = New System.Drawing.Point(623, 46)
+        Me.CalsResultLabel.Location = New System.Drawing.Point(670, 47)
         Me.CalsResultLabel.Name = "CalsResultLabel"
         Me.CalsResultLabel.Size = New System.Drawing.Size(0, 13)
         Me.CalsResultLabel.TabIndex = 15
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(374, 114)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(99, 13)
+        Me.Label2.TabIndex = 16
+        Me.Label2.Text = "Kolik kusu? (max 3)"
+        '
+        'TrackBar
+        '
+        Me.TrackBar.LargeChange = 1
+        Me.TrackBar.Location = New System.Drawing.Point(536, 123)
+        Me.TrackBar.Minimum = 1
+        Me.TrackBar.Name = "TrackBar"
+        Me.TrackBar.Size = New System.Drawing.Size(104, 45)
+        Me.TrackBar.TabIndex = 17
+        Me.TrackBar.Value = 1
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 428)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(800, 22)
+        Me.StatusStrip1.TabIndex = 18
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(119, 17)
+        Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
         '
         'MainForm
         '
@@ -368,6 +409,9 @@ Partial Class MainForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.EscButton
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.StatusStrip1)
+        Me.Controls.Add(Me.TrackBar)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.CalsResultLabel)
         Me.Controls.Add(Me.ConfirmCalcButton)
         Me.Controls.Add(Me.OperandLabel)
@@ -402,6 +446,9 @@ Partial Class MainForm
         Me.ContextMenuStripRemoveMaterial.ResumeLayout(False)
         Me.ManipulateItems.ResumeLayout(False)
         CType(Me.OrderedAmmntNumericUpDown, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TrackBar, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -443,4 +490,8 @@ Partial Class MainForm
     Friend WithEvents OperandLabel As Windows.Forms.Label
     Friend WithEvents ConfirmCalcButton As Windows.Forms.Button
     Friend WithEvents CalsResultLabel As Windows.Forms.Label
+    Friend WithEvents Label2 As Windows.Forms.Label
+    Friend WithEvents TrackBar As Windows.Forms.TrackBar
+    Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip
+    Friend WithEvents ToolStripStatusLabel1 As Windows.Forms.ToolStripStatusLabel
 End Class

@@ -1,5 +1,6 @@
 ﻿Option Explicit On
 
+Imports System.Drawing
 Imports System.Windows.Forms
 
 Public Class MainForm
@@ -9,6 +10,8 @@ Public Class MainForm
     Dim radiobuttonBeingEdited As RadioButton
     Public itemTypes As New List(Of String)
     Dim itemBeingEdited As String
+    Dim calcVal1 As Integer
+    Dim calcVal2 As Integer
     Dim i As Integer
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click, ToolStripButton2.Click, ToolStripButton3.Click
         EscButton.BackgroundImage = sender.image
@@ -40,6 +43,7 @@ Public Class MainForm
         AddHandler OrderedAmmntNumericUpDown.ValueChanged, AddressOf RefreshOrderChoices
         actOrder.Ammount = OrderedAmmntNumericUpDown.Value
         ActOrderLabel.Text = actOrder.ToString
+        ToolStripStatusLabel1.Text = TrackBar.Value
         RefreshMaterialChoices()
         RefreshITemTypeChoices()
 
@@ -90,6 +94,49 @@ Public Class MainForm
 
     Private Sub ActOrderLabel_DoubleClick(sender As Label, e As EventArgs) Handles ActOrderLabel.DoubleClick
         TextBoxMain.Text += sender.Text
+    End Sub
+
+    Private Sub ConfirmCalcButton_Click(sender As Object, e As EventArgs) Handles ConfirmCalcButton.Click
+        Dim res As Integer
+        Dim font1 As New Font(CalsResultLabel.Font, FontStyle.Bold)
+        Dim font2 As New Font(CalsResultLabel.Font, FontStyle.Regular)
+        res = calcVal1 + calcVal2
+        If res > 0 Then
+            CalsResultLabel.Font = font1
+        Else
+            CalsResultLabel.Font = font2
+        End If
+        CalsResultLabel.Text = res.ToString
+    End Sub
+    Public Function ValidateTextBoxForIntWithSign(ByRef tb As TextBox) As Integer
+        Dim Result As Integer
+        If (Integer.TryParse(tb.Text, Result)) Then
+            Return Result
+        Else
+
+            If Not tb.Text.Equals("-") Then
+                Dim temp As String
+                If (tb.Text.Length > 0) Then
+                    temp = tb.Text.Substring(0, tb.Text.Length - 1)
+                    tb.Text = temp
+                End If
+
+            End If
+            Return Result
+        End If
+    End Function
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        calcVal1 = ValidateTextBoxForIntWithSign(sender)
+    End Sub
+
+    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
+        calcVal2 = ValidateTextBoxForIntWithSign(sender)
+    End Sub
+
+    Private Sub TrackBar_Scroll(sender As TrackBar, e As EventArgs) Handles TrackBar.Scroll
+        ToolStripStatusLabel1.Text = sender.Value.ToString
+        ToolTip1.SetToolTip(sender, "Nastaveno: " + sender.Value.ToString)
     End Sub
 End Class
 Public Class Order
