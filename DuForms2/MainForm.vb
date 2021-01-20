@@ -175,17 +175,21 @@ Public Class MainForm
     End Sub
 
     Private Sub OtevřítToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OtevřítToolStripMenuItem.Click
+
         Dim dialResult As DialogResult
+        Dim temp As String
         dialResult = OpenFileDialog1.ShowDialog()
         If dialResult.Equals(DialogResult.OK) Then 'Check for valid file choice and opening - user pressed 
             FileOpen(1, OpenFileDialog1.FileName, OpenMode.Input)
+            TextBoxMain.Clear()
             Try
-                Input(1, TextBoxMain.Text)
+                temp = OpenFileDialog1.FileName
             Catch
                 MsgBox("Chyba!")
             Finally
                 FileClose(1)
-
+                TextBoxMain.Text = temp
+                TextBoxMain.Text = My.Computer.FileSystem.ReadAllText(temp)
             End Try
         End If
     End Sub
@@ -196,15 +200,18 @@ Public Class MainForm
 
     Private Sub UložitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UložitToolStripMenuItem.Click
         Dim dialResult As DialogResult
+        Dim temp As String
         dialResult = SaveFileDialog1.ShowDialog
         If dialResult.Equals(DialogResult.OK) Then 'Check for valid file choice 
             FileOpen(1, SaveFileDialog1.FileName, OpenMode.Output)
             Try
-                Write(1, TextBoxMain.Text)
+                'Write(1, TextBoxMain.Text)
+                temp = SaveFileDialog1.FileName
             Catch ex As Exception
                 MsgBox("Chyba!")
             Finally
                 FileClose(1)
+                My.Computer.FileSystem.WriteAllText(temp, TextBoxMain.Text, False)
             End Try
         End If
     End Sub
