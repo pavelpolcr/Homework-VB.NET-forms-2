@@ -54,7 +54,8 @@ Public Class MainForm
         ToolStripStatusLabel1.Text = TrackBar.Value
         RefreshMaterialChoices()
         RefreshITemTypeChoices()
-        cekat = 10
+        ProgressBar.Maximum = cekat
+        'cekat = 10
 
     End Sub
 
@@ -165,9 +166,9 @@ Public Class MainForm
         If (cekat > 0) Then
             cekat -= 1
             ProgressBar.Value += 1
-            InstallLabel.Text = ("Proviha instalace soucasti - cekejte jeste " + cekat.ToString + " s.")
+            InstallLabel.Text = ("Probiha instalace soucasti - cekejte jeste " + cekat.ToString + " s.")
         Else
-            InstallLabel.Text = "Instalace hotova."
+            InstallLabel.Text = "Instalace hotova, trvala:" + ProgressBar.Maximum.ToString + " sekund."
         End If
 
 
