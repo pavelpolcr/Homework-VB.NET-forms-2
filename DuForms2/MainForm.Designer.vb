@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MainForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class MainForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
@@ -70,7 +70,6 @@ Partial Class MainForm
         Me.InstallLabel = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.ToolStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -483,14 +482,6 @@ Partial Class MainForm
         Me.SaveFileDialog1.DefaultExt = "txt"
         Me.SaveFileDialog1.Filter = "txt | *.txt|vsechny soubory|*.*"
         '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(675, 245)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(282, 199)
-        Me.TextBox3.TabIndex = 21
-        '
         'MainForm
         '
         Me.AcceptButton = Me.ConfirmCalcButton
@@ -498,7 +489,6 @@ Partial Class MainForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.EscButton
         Me.ClientSize = New System.Drawing.Size(1067, 554)
-        Me.Controls.Add(Me.TextBox3)
         Me.Controls.Add(Me.InstallLabel)
         Me.Controls.Add(Me.ProgressBar)
         Me.Controls.Add(Me.StatusStrip1)
@@ -594,5 +584,4 @@ Partial Class MainForm
     Friend WithEvents InstallLabel As Windows.Forms.Label
     Friend WithEvents OpenFileDialog1 As Windows.Forms.OpenFileDialog
     Friend WithEvents SaveFileDialog1 As Windows.Forms.SaveFileDialog
-    Friend WithEvents TextBox3 As Windows.Forms.TextBox
 End Class

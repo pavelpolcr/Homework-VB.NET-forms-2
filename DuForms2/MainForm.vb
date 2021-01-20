@@ -189,7 +189,7 @@ Public Class MainForm
                 MsgBox("Chyba!")
             Finally
                 FileClose(1)
-                TextBoxMain.Text = temp
+
                 TextBoxMain.Text = My.Computer.FileSystem.ReadAllText(temp)
             End Try
         End If
